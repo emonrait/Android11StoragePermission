@@ -32,6 +32,7 @@ import android.provider.Settings
 import android.view.MenuItem
 import java.lang.Exception
 import android.widget.Toast
+import androidx.annotation.Nullable
 
 
 class MainActivity : AppCompatActivity() {
@@ -83,6 +84,24 @@ class MainActivity : AppCompatActivity() {
                 arrayOf(WRITE_EXTERNAL_STORAGE),
                 PERMISSION_REQUEST_CODE
             )
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, @Nullable data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 2296) {
+            if (SDK_INT >= Build.VERSION_CODES.R) {
+                if (Environment.isExternalStorageManager()) {
+                    // perform action when allow permission success
+
+
+                } else {
+                    Toast.makeText(this,
+                        "Allow permission for storage access!",
+                        Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
         }
     }
 
